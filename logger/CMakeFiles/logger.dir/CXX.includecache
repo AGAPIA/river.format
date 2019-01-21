@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.cpp
+AbstractLog.h
+/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.h
+string.h
+-
+
+/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.cpp
+FileLog.h
+/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.h
+string.h
+-
+
+/home/ciprian/testtools/simpletracer/river.format/logger/Logger.cpp
+Logger.h
+/home/ciprian/testtools/simpletracer/river.format/logger/Logger.h
+stdarg.h
+-
+
+river.format/include/AbstractLog.h
+revtracer/revtracer.h
+river.format/include/revtracer/revtracer.h
+CommonCrossPlatform/Common.h
+river.format/include/CommonCrossPlatform/Common.h
+
+river.format/include/FileLog.h
+stdio.h
+-
+AbstractLog.h
+river.format/include/AbstractLog.h
+CommonCrossPlatform/Common.h
+river.format/include/CommonCrossPlatform/Common.h
+
+river.format/include/Logger.h
+stdio.h
+-
+

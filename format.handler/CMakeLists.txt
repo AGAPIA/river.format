@@ -6,6 +6,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -m32 -std=c++11 -D__cdecl=\"\" -D__st
 include_directories($ENV{RIVER_SDK_DIR}/include
 	)
 
+include_directories("../include")
+
 add_library(format.handler STATIC
     BinFormat.cpp
     TextFormat.cpp
