@@ -15,6 +15,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/include"
   "river.format/include"
   "river.format/format.handler/../include"
+  "river.format/format.handler/../../river"
   )
 
 # Targets to which this target links.

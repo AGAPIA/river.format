@@ -1,0 +1,7 @@
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/install.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/list_install_components.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/rebuild_cache.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/logger.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/install/strip.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/install/local.dir
+/home/ciprian/testtools/river/river.format/logger/CMakeFiles/edit_cache.dir

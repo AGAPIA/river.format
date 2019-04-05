@@ -16,6 +16,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/include"
   "river.format/include"
   "river.format/logger/../include"
+  "river.format/logger/../../river"
   )
 
 # Targets to which this target links.

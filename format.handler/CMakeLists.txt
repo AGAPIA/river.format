@@ -7,6 +7,7 @@ include_directories($ENV{RIVER_SDK_DIR}/include
 	)
 
 include_directories("../include")
+include_directories("../../river")
 
 add_library(format.handler STATIC
     BinFormat.cpp
