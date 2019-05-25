@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.cpp" "/home/ciprian/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.o"
-  "/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.cpp" "/home/ciprian/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.o"
-  "/home/ciprian/testtools/simpletracer/river.format/logger/Logger.cpp" "/home/ciprian/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/Logger.cpp.o"
+  "/home/boc/testtools/simpletracer/river.format/logger/AbstractLog.cpp" "/home/boc/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.o"
+  "/home/boc/testtools/simpletracer/river.format/logger/FileLog.cpp" "/home/boc/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.o"
+  "/home/boc/testtools/simpletracer/river.format/logger/Logger.cpp" "/home/boc/testtools/simpletracer/river.format/logger/CMakeFiles/logger.dir/Logger.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

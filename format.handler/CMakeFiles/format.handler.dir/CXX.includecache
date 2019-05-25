@@ -6,23 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormat.cpp
+/home/boc/testtools/simpletracer/river.format/format.handler/BinFormat.cpp
 BinFormat.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormat.h
+/home/boc/testtools/simpletracer/river.format/format.handler/BinFormat.h
 string.h
 -
 cstdlib
 -
 CommonCrossPlatform/Common.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
+/home/boc/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
 
-/home/ciprian/testtools/simpletracer/river.format/format.handler/TextFormat.cpp
+/home/boc/testtools/simpletracer/river.format/format.handler/TextFormat.cpp
 TextFormat.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/TextFormat.h
+/home/boc/testtools/simpletracer/river.format/format.handler/TextFormat.h
 revtracer/river.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/revtracer/river.h
+/home/boc/testtools/simpletracer/river.format/format.handler/revtracer/river.h
 CommonCrossPlatform/Common.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
+/home/boc/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
 string.h
 -
 

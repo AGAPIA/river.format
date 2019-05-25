@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.cpp
+/home/boc/testtools/simpletracer/river.format/logger/AbstractLog.cpp
 AbstractLog.h
-/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.h
+/home/boc/testtools/simpletracer/river.format/logger/AbstractLog.h
 string.h
 -
 
-/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.cpp
+/home/boc/testtools/simpletracer/river.format/logger/FileLog.cpp
 FileLog.h
-/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.h
+/home/boc/testtools/simpletracer/river.format/logger/FileLog.h
 string.h
 -
 
-/home/ciprian/testtools/simpletracer/river.format/logger/Logger.cpp
+/home/boc/testtools/simpletracer/river.format/logger/Logger.cpp
 Logger.h
-/home/ciprian/testtools/simpletracer/river.format/logger/Logger.h
+/home/boc/testtools/simpletracer/river.format/logger/Logger.h
 stdarg.h
 -
 

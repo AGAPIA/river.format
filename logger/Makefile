@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ciprian/testtools/simpletracer
+CMAKE_SOURCE_DIR = /home/boc/testtools/simpletracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ciprian/testtools/simpletracer
+CMAKE_BINARY_DIR = /home/boc/testtools/simpletracer
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,14 +124,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/simpletracer/CMakeFiles /home/ciprian/testtools/simpletracer/river.format/logger/CMakeFiles/progress.marks
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/simpletracer/CMakeFiles 0
+	cd /home/boc/testtools/simpletracer && $(CMAKE_COMMAND) -E cmake_progress_start /home/boc/testtools/simpletracer/CMakeFiles /home/boc/testtools/simpletracer/river.format/logger/CMakeFiles/progress.marks
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/boc/testtools/simpletracer/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/clean
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/preinstall
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/preinstall
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/boc/testtools/simpletracer && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 river.format/logger/CMakeFiles/logger.dir/rule:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/CMakeFiles/logger.dir/rule
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/logger/CMakeFiles/logger.dir/rule
 .PHONY : river.format/logger/CMakeFiles/logger.dir/rule
 
 # Convenience name for target.
@@ -166,7 +166,7 @@ logger: river.format/logger/CMakeFiles/logger.dir/rule
 
 # fast build rule for target.
 logger/fast:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/build
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/build
 .PHONY : logger/fast
 
 AbstractLog.o: AbstractLog.cpp.o
@@ -175,7 +175,7 @@ AbstractLog.o: AbstractLog.cpp.o
 
 # target to build an object file
 AbstractLog.cpp.o:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.o
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.o
 .PHONY : AbstractLog.cpp.o
 
 AbstractLog.i: AbstractLog.cpp.i
@@ -184,7 +184,7 @@ AbstractLog.i: AbstractLog.cpp.i
 
 # target to preprocess a source file
 AbstractLog.cpp.i:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.i
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.i
 .PHONY : AbstractLog.cpp.i
 
 AbstractLog.s: AbstractLog.cpp.s
@@ -193,7 +193,7 @@ AbstractLog.s: AbstractLog.cpp.s
 
 # target to generate assembly for a file
 AbstractLog.cpp.s:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.s
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/AbstractLog.cpp.s
 .PHONY : AbstractLog.cpp.s
 
 FileLog.o: FileLog.cpp.o
@@ -202,7 +202,7 @@ FileLog.o: FileLog.cpp.o
 
 # target to build an object file
 FileLog.cpp.o:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.o
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.o
 .PHONY : FileLog.cpp.o
 
 FileLog.i: FileLog.cpp.i
@@ -211,7 +211,7 @@ FileLog.i: FileLog.cpp.i
 
 # target to preprocess a source file
 FileLog.cpp.i:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.i
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.i
 .PHONY : FileLog.cpp.i
 
 FileLog.s: FileLog.cpp.s
@@ -220,7 +220,7 @@ FileLog.s: FileLog.cpp.s
 
 # target to generate assembly for a file
 FileLog.cpp.s:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.s
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/FileLog.cpp.s
 .PHONY : FileLog.cpp.s
 
 Logger.o: Logger.cpp.o
@@ -229,7 +229,7 @@ Logger.o: Logger.cpp.o
 
 # target to build an object file
 Logger.cpp.o:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.o
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.o
 .PHONY : Logger.cpp.o
 
 Logger.i: Logger.cpp.i
@@ -238,7 +238,7 @@ Logger.i: Logger.cpp.i
 
 # target to preprocess a source file
 Logger.cpp.i:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.i
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.i
 .PHONY : Logger.cpp.i
 
 Logger.s: Logger.cpp.s
@@ -247,7 +247,7 @@ Logger.s: Logger.cpp.s
 
 # target to generate assembly for a file
 Logger.cpp.s:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.s
+	cd /home/boc/testtools/simpletracer && $(MAKE) -f river.format/logger/CMakeFiles/logger.dir/build.make river.format/logger/CMakeFiles/logger.dir/Logger.cpp.s
 .PHONY : Logger.cpp.s
 
 # Help Target
@@ -283,6 +283,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/boc/testtools/simpletracer && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

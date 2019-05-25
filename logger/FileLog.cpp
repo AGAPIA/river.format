@@ -2,7 +2,10 @@
 #include <string.h>
 
 bool FileLog::_OpenLog() {
-	fLog = fopen(logName, "wb");
+	if (strcmp(logName, "stdout") == 0)
+		fLog = stdout;
+	else
+		fLog = fopen(logName, "wb");
 
 	return fLog != nullptr;
 }
