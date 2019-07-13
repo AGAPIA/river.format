@@ -3,6 +3,7 @@
 
 #include "revtracer/revtracer.h"		//ExecutionRegs
 #include "CommonCrossPlatform/Common.h" //MAX_PATH
+#include <cstring>
 
 class AbstractLog {
 private :
@@ -70,7 +71,22 @@ struct SymbolicAst {
 	size_t size;
 };
 
+struct TestCase {
+	struct BasicBlockPointer bbp;
+	unsigned int cost;
+	unsigned int jumpType;
+	unsigned int jumpInstruction;
+	unsigned int esp;
+	unsigned int nInstructions;
+	unsigned int bbpNextSize;
+	struct BasicBlockPointer nextBasicBlockPointer;
+	unsigned long instructionAddress;
+	char* Z3_code;
+};
+
 class AbstractFormat {
+public:
+	struct TestCase testCase;
 protected :
 	AbstractLog *log;
 
@@ -83,6 +99,26 @@ public :
 	virtual bool WriteTestName(
 		const char *testName
 	) = 0;
+
+	void setBasicBlockMeta_to_TestCase(BasicBlockMeta bbm) {
+		this->testCase.bbp = bbm.bbp;
+		this->testCase.cost = bbm.cost;
+		this->testCase.jumpType = bbm.jumpType;
+		this->testCase.jumpInstruction = bbm.jumpInstruction;
+		this->testCase.esp = bbm.esp;
+		this->testCase.nInstructions = bbm.nInstructions;
+		this->testCase.bbpNextSize = bbm.bbpNextSize;
+
+		this->testCase.nextBasicBlockPointer.offset = bbm.bbpNext->offset;
+		strcpy(this->testCase.nextBasicBlockPointer.modName,  bbm.bbpNext->modName);
+	}
+
+	void setBasicZ3_astStringcode_to_TestCase(unsigned long instructionAddress, const char  *z3_code) {
+		//strcpy(this->testCase.Z3_code, std::string(z3_code));
+		//free(this->testCase.Z3_code);
+		this->testCase.Z3_code = strdup(z3_code);
+		this->testCase.instructionAddress = instructionAddress;
+	}
 
 	virtual bool WriteRegisters(rev::ExecutionRegs &regs) = 0;
 

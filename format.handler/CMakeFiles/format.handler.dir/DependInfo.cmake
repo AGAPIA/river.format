@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormat.cpp" "/home/ciprian/testtools/simpletracer/river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o"
-  "/home/ciprian/testtools/simpletracer/river.format/format.handler/TextFormat.cpp" "/home/ciprian/testtools/simpletracer/river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o"
+  "/home/ceachi/testtools/simpletracer/river.format/format.handler/BinFormat.cpp" "/home/ceachi/testtools/simpletracer/river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o"
+  "/home/ceachi/testtools/simpletracer/river.format/format.handler/TextFormat.cpp" "/home/ceachi/testtools/simpletracer/river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -14,6 +14,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "include"
   "/include"
   "river.format/include"
+  "/home/ceachi/testtools/river/z3/include"
   "river.format/format.handler/../include"
   "river.format/format.handler/../../river"
   )
