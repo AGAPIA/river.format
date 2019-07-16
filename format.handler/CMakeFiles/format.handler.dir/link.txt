@@ -1,2 +1,0 @@
-/usr/bin/ar qc libformat.handler.a  CMakeFiles/format.handler.dir/BinFormat.cpp.o CMakeFiles/format.handler.dir/TextFormat.cpp.o
-/usr/bin/ranlib libformat.handler.a
