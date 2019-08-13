@@ -336,8 +336,10 @@ bool BinFormat::WriteZ3SymbolicAddress(unsigned int dest,
 	return true;
 }
 
-bool BinFormat::WriteZ3SymbolicJumpCC(unsigned int dest,
-		SymbolicFlag symbolicFlag, SymbolicAst ast) {
+bool BinFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) {
+
+/*
+TODO:
 	BinLogEntry bleo;
 	bleo.header.entryType = ENTRY_TYPE_Z3_SYMBOLIC;
 	bleo.data.asZ3Symbolic.header.entryType = Z3_SYMBOLIC_TYPE_JCC;
@@ -359,7 +361,7 @@ bool BinFormat::WriteZ3SymbolicJumpCC(unsigned int dest,
 			bleo.header.entryLength);
 
 	WriteAst(ast);
-
+*/
 	return true;
 }
 

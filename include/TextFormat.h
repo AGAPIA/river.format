@@ -35,8 +35,7 @@ public :
 			unsigned int value, unsigned int size);
 	virtual bool WriteZ3SymbolicAddress(unsigned int dest,
 			SymbolicAddress symbolicAddress, SymbolicAst ast);
-	virtual bool WriteZ3SymbolicJumpCC(unsigned int dest,
-			SymbolicFlag symbolicFlag, SymbolicAst ast);
+	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
 
 private:
 	void WriteAst(SymbolicAst ast);

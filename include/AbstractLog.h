@@ -30,7 +30,7 @@ public :
 #define DISP8	0x01
 #define DISP	0x04
 
-#define MAX_LINE_SIZE 512
+#define MAX_LINE_SIZE 8096
 
 struct BasicBlockPointer {
 	unsigned int offset;
@@ -67,7 +67,37 @@ struct SymbolicFlag {
 
 struct SymbolicAst {
 	const char *address;
-	size_t size;
+	unsigned int size;
+};
+
+#include <unordered_set>
+
+// Details about a test in the source code.
+// It is partially filled before a jump is executed, and fully filled after.
+struct SingleTestDetails
+{
+	//static const int MAX_Z3STR_SIZE = 8096;
+	SymbolicAst ast;//[MAX_Z3STR_SIZE];  Pointer to the Z3 AST defining the condition
+	SymbolicFlag flags;	// These are the flags involved in the jump test. E.g. JA will test CF and ZF 
+
+	DWORD parentBlock = 0;	//Block address where  the jump command happens 
+	DWORD blockOptionTaken = 0;	//BLock address where it should go if jump is taken
+	DWORD blockOptionNotTaken = 0; // BLock address where it should go if jump is no taken
+	std::unordered_set<unsigned int> indicesOfInputBytesUsed; // Indices of input bytes used by this test 
+	bool pending = false; // True if a Jump instruction found and we wait to know if it was taken or not
+	bool taken = false;
+	bool isPending() const { return pending;}
+	void setPending(const bool _pending) { pending = _pending;}
+
+	void Reset()
+	{
+		ast.address = nullptr;
+		ast.size = 0;
+		parentBlock = blockOptionTaken = blockOptionNotTaken = 0;
+		pending = false;
+		taken = false;
+		indicesOfInputBytesUsed.clear();
+	}
 };
 
 class AbstractFormat {
@@ -106,8 +136,7 @@ public :
 			unsigned int value, unsigned int size) = 0;
 	virtual bool WriteZ3SymbolicAddress(unsigned int dest,
 			SymbolicAddress symbolicAddress, SymbolicAst ast) = 0;
-	virtual bool WriteZ3SymbolicJumpCC(unsigned int dest,
-			SymbolicFlag symbolicFlag, SymbolicAst ast) = 0;
+	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) = 0;
 
 };
 

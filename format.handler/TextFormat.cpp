@@ -202,10 +202,43 @@ bool TextFormat::WriteZ3SymbolicAddress(unsigned int dest, SymbolicAddress symbo
 	return true;
 }
 
-bool TextFormat::WriteZ3SymbolicJumpCC(unsigned int dest, SymbolicFlag symbolicFlag, SymbolicAst ast) {
+bool TextFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) 
+{
 	size_t sz;
 	char line[MAX_LINE_SIZE];
+	sz = snprintf(line, MAX_LINE_SIZE, "Test: %08lx - Taken %08lx, NotTaken %08lx. Was taken ? %s\n",
+					testDetails.parentBlock, testDetails.blockOptionTaken, 
+					testDetails.blockOptionNotTaken, testDetails.taken ? "Yes" : "No");
 
+	// Write header
+	log->WriteBytes((unsigned char *)line, sz);
+
+	// Write the used symbols indices for this test. The first one is the number of digits used
+	{
+		int remainingSize = MAX_LINE_SIZE;
+		char* headerPos = line;
+
+		// Number of symbols used 
+		int written = snprintf(headerPos, remainingSize, "%d ", testDetails.indicesOfInputBytesUsed.size());
+		remainingSize -= written;
+		headerPos += written;
+
+		for (const unsigned int item : testDetails.indicesOfInputBytesUsed)
+		{
+			written = snprintf(headerPos, remainingSize, "%d ", item);
+			remainingSize -= written;
+			headerPos += written;
+		}
+
+		log->WriteBytes((unsigned char*)line, headerPos - line);
+	}
+
+	// Write Z3 ast
+	log->WriteBytes((unsigned char *)testDetails.ast.address, testDetails.ast.size);
+
+	log->WriteBytes((unsigned char*)"\n\n", 2);
+/* 
+Could also write the symbolic flags info but why do we need it ?
 	sz = sprintf(line, "jcc 0x%08X <=", symbolicFlag.symbolicCond);
 
 	for (int i = 0; i < flagCount; ++i) {
@@ -218,7 +251,7 @@ bool TextFormat::WriteZ3SymbolicJumpCC(unsigned int dest, SymbolicFlag symbolicF
 	log->WriteBytes((unsigned char *)line, sz);
 
 	WriteAst(ast);
-
+*/
 	return true;
 }
 

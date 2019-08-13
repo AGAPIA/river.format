@@ -206,8 +206,7 @@ public :
 			unsigned int value, unsigned int size);
 	virtual bool WriteZ3SymbolicAddress(unsigned int dest,
 			SymbolicAddress symbolicAddress, SymbolicAst ast);
-	virtual bool WriteZ3SymbolicJumpCC(unsigned int dest,
-			SymbolicFlag symbolicFlag, SymbolicAst ast);
+	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
 
 	// Callbacks to know about execution status and update internal data structures	
 	void OnExecutionEnd() override;
