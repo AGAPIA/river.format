@@ -10,8 +10,10 @@ public:
 	~Logger();
 
 	void Log( const char * format, ... );
+	void Log(const bool fromArgs, const va_list& arglist, const char* format);
 	void EnableLog();
 	void SetLoggingToFile(const char* filename);
+	void SetLoggingToFile(FILE* _file);
 
 private:	
 	bool writeLogOnFile;

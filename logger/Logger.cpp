@@ -27,6 +27,14 @@ void Logger::Log( const char * format, ... )
 	fflush(logFile);
 }
 
+void Logger::Log(const bool fromArgs, const va_list& arglist, const char* format)
+{
+	if (!isLogEnabled)
+		return ;
+
+    vfprintf(logFile, format, arglist);
+}
+
 void Logger::EnableLog() 
 { 
     isLogEnabled = true; 
@@ -38,3 +46,11 @@ void Logger::SetLoggingToFile(const char* filename)
 	writeLogOnFile = true;
 }
 
+void Logger::SetLoggingToFile(FILE* _file)
+{
+	if (_file != logFile) // By default we have stdout
+	{
+		logFile = _file;
+		writeLogOnFile = true;
+	}
+}
