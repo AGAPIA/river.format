@@ -1,4 +1,12 @@
 *.a
 *.o
 *.so
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+cmake_install.cmake
+Makefile
+logger/Makefile
+format.handler/Makefile
 
