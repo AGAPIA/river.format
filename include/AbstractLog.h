@@ -80,9 +80,13 @@ struct SingleTestDetails
 	SymbolicAst ast;//[MAX_Z3STR_SIZE];  Pointer to the Z3 AST defining the condition
 	SymbolicFlag flags;	// These are the flags involved in the jump test. E.g. JA will test CF and ZF 
 
+
 	DWORD parentBlock = 0;	//Block address where  the jump command happens 
+	char parentModuleName[MAX_PATH] = {'\0'};
 	DWORD blockOptionTaken = 0;	//BLock address where it should go if jump is taken
+	char takenOptionModuleName[MAX_PATH] = {'\0'};
 	DWORD blockOptionNotTaken = 0; // BLock address where it should go if jump is no taken
+	char notTakenOptionModuleName[MAX_PATH] = {'\0'};
 	std::unordered_set<unsigned int> indicesOfInputBytesUsed; // Indices of input bytes used by this test 
 	bool pending = false; // True if a Jump instruction found and we wait to know if it was taken or not
 	bool taken = false;
@@ -94,10 +98,16 @@ struct SingleTestDetails
 		ast.address = nullptr;
 		ast.size = 0;
 		parentBlock = blockOptionTaken = blockOptionNotTaken = 0;
+		parentModuleName[0] = takenOptionModuleName[0] = notTakenOptionModuleName[0] = '\0';
 		pending = false;
 		taken = false;
 		indicesOfInputBytesUsed.clear();
 	}
+
+
+	// Serialize and deserializa this data structure to a give buffer. Both read/written sizes
+	int serialize(char* outputBuffer, const size_t maxOutputSize) const;
+	int deserialize(const char* inputBuffer, const size_t inputBufferSize);
 };
 
 class AbstractFormat {

@@ -1,7 +1,7 @@
 #include "BinFormat.h"
 
 #include <string.h>
-
+#include <assert.h>
 #include <cstdlib>
 
 #include "CommonCrossPlatform/Common.h" //MAX_PATH
@@ -338,6 +338,14 @@ bool BinFormat::WriteZ3SymbolicAddress(unsigned int dest,
 
 bool BinFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) {
 
+
+	// UNIT TEST ONLY FOR NOW
+	char outBuffer[MAX_ENTRIES_BUFFER_SIZE];
+	const int size = testDetails.serialize(outBuffer, MAX_ENTRIES_BUFFER_SIZE);
+
+	SingleTestDetails testDetails_copy;
+	testDetails_copy.deserialize(outBuffer, size);
+
 /*
 TODO:
 	BinLogEntry bleo;
@@ -421,4 +429,154 @@ void BinLog::FlushLog() {
 	fflush(fLog);
 }*/
 
+
+// Returns the size of string serialize
+// string dim : int | string characters
+// If you know already the size of the string give it such that we don't do strlen anymore
+int serializeString(char*& outputBuffer, const char* inputStr, int knownStringSize = -1)
+{
+	const int size = knownStringSize > 0 ? knownStringSize : strlen(inputStr);
+	memcpy(outputBuffer, &size, sizeof(size)); 
+	outputBuffer += sizeof(size);
+	memcpy(outputBuffer, inputStr, size); 
+	outputBuffer += size;
+	return sizeof(size) + size;
+}
+
+// Expected basic data types representing numbers..
+template<typename T>
+int serializeNumber(char*& outputBuffer, const T value)
+{
+	memcpy(outputBuffer, &value, sizeof(value)); 					
+	outputBuffer += sizeof(value);
+	return sizeof(value);
+}
+
+// Returns  the size of string
+// if deep version is used, outputBuffer will point relatively to inputBuffer so either copy it or store your inputBuffer
+int deserializeString_deep(const char* inputBuffer, char* outputBuffer, const size_t maxOutputSize)
+{
+	int outStringSize = -1;
+	memcpy(&outStringSize, inputBuffer, sizeof(outStringSize));
+
+	if (outStringSize > maxOutputSize + 1)
+	{
+		assert("Increase buffer, can't read anything");
+		return -1;
+	}
+	assert(outStringSize >= 0);
+	inputBuffer += sizeof(outStringSize);
+
+	memcpy(outputBuffer, inputBuffer, outStringSize);
+	outputBuffer[outStringSize] = '\0';
+
+	return outStringSize;
+}
+
+int deserializeString_shallow(const char* inputBuffer, char*& outputBuffer, const size_t maxOutputSize)
+{
+	int outStringSize = -1;
+	memcpy(&outStringSize, inputBuffer, sizeof(outStringSize));
+
+	if (outStringSize > maxOutputSize + 1)
+	{
+		assert("Increase buffer, can't read anything");
+		return -1;
+	}
+	assert(outStringSize >= 0);
+	inputBuffer += sizeof(outStringSize);
+	outputBuffer = (char*)inputBuffer;
+
+	return outStringSize;
+}
+
+//----------------
+
+// Expected basic data types representing numbers..
+template<typename T>
+int deserializeNumber(char*& inputBuffer, T& outValue)
+{
+	memcpy(&outValue, inputBuffer, sizeof(outValue)); 					
+	inputBuffer += sizeof(outValue);
+	return sizeof(outValue);
+}
+
+int SingleTestDetails::serialize(char* outputBufferInitial, const size_t maxOutputSize) const
+{
+	
+	char* outputBuffer = outputBufferInitial;
+	const int taken_as_int = (int)taken;
+	const int numSymbolsUsed = indicesOfInputBytesUsed.size();
+
+	// Write the first line info: test id location, where to go if taken, where to go if not taken
+	{
+		serializeString(outputBuffer, parentModuleName );
+		serializeString(outputBuffer, takenOptionModuleName );
+		serializeString(outputBuffer, notTakenOptionModuleName );
+		serializeNumber(outputBuffer, parentBlock);
+		serializeNumber(outputBuffer, blockOptionTaken);
+		serializeNumber(outputBuffer, blockOptionNotTaken);	
+		serializeNumber(outputBuffer, taken_as_int);	
+	}
+
+	// Write the second line: the number of symbolic variables and their indices used by the corresponding Z3 expression involved in the test
+	{
+		serializeNumber(outputBuffer, numSymbolsUsed);
+		for (auto it : indicesOfInputBytesUsed)
+		{
+			serializeNumber(outputBuffer, it);
+		}
+	}
+
+	// Write the last line: the AST expression
+	serializeString(outputBuffer, ast.address, ast.size );
+
+	const bool isOk = (outputBuffer - outputBufferInitial) <= maxOutputSize;
+	assert(isOk);
+	return isOk;
+}
+
+int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t inputBufferSize)
+{
+	Reset();
+
+	char* inputBuffer = (char*)inputBufferInitial;
+	int taken_as_int = -1;
+	int numSymbolsUsed = -1;
+
+	// Read the first line info: test id location, where to go if taken, where to go if not taken
+	{
+		deserializeString_deep(inputBuffer, parentModuleName, sizeof(parentModuleName));
+		deserializeString_deep(inputBuffer, takenOptionModuleName, sizeof(takenOptionModuleName));
+		deserializeString_deep(inputBuffer, notTakenOptionModuleName, sizeof(notTakenOptionModuleName));
+		deserializeNumber(inputBuffer, parentBlock);
+		deserializeNumber(inputBuffer, blockOptionTaken);
+		deserializeNumber(inputBuffer, blockOptionNotTaken);	
+		deserializeNumber(inputBuffer, taken_as_int);	
+		assert(taken_as_int == 1 || taken_as_int == 0);
+		taken = taken_as_int == 1 ? true : false;
+	}
+
+	// Read the second line: the number of symbolic variables and their indices used by the corresponding Z3 expression involved in the test
+	{
+		deserializeNumber(inputBuffer, numSymbolsUsed);
+		assert(numSymbolsUsed >= 0);
+		for (int i = 0; i < numSymbolsUsed; i++)
+		{
+			int item = -1;
+			deserializeNumber(inputBuffer, item);
+			indicesOfInputBytesUsed.insert(item);
+		}
+	}
+
+	// Read the last line: the AST expression
+	char* inputZ3 = nullptr;
+	deserializeString_shallow(inputBuffer, inputZ3, ast.size);
+	ast.address = inputZ3;
+
+	const bool isOk = (inputBuffer - inputBufferInitial) == inputBufferSize;
+	assert(isOk);
+	return isOk;
+
+}
 
