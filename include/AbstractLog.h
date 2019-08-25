@@ -3,6 +3,7 @@
 
 #include "revtracer/revtracer.h"		//ExecutionRegs
 #include "CommonCrossPlatform/Common.h" //MAX_PATH
+#include <string.h>
 
 class AbstractLog {
 private :
@@ -108,6 +109,21 @@ struct SingleTestDetails
 	// Serialize and deserializa this data structure to a give buffer. Both read/written sizes
 	int serialize(char* outputBuffer, const size_t maxOutputSize) const;
 	int deserialize(const char* inputBuffer, const size_t inputBufferSize);
+
+	bool operator==(const SingleTestDetails& other) const
+	{
+		if (taken != other.taken) return false;
+		if (parentBlock != other.parentBlock) return false;
+		if (blockOptionNotTaken != other.blockOptionNotTaken) return false;
+		if (blockOptionTaken != other.blockOptionTaken) return false;
+		if (strcmp(parentModuleName, other.parentModuleName)) return false;
+		if (strcmp(notTakenOptionModuleName, other.notTakenOptionModuleName)) return false;
+		if (strcmp(takenOptionModuleName, other.takenOptionModuleName)) return false;
+		if (indicesOfInputBytesUsed != other.indicesOfInputBytesUsed) return false;
+		if (ast.size != other.ast.size || strcmp(ast.address, other.ast.address)) return false;
+
+		return true;
+	}
 };
 
 class AbstractFormat {

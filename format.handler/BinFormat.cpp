@@ -133,6 +133,7 @@ void BinFormat::WriteData(unsigned char* data, const unsigned int size, const bo
 			if (bufferHeaderPos + size >= MAX_ENTRIES_BUFFER_SIZE)
 			{
 				exit(1);
+				fprintf(stderr, "FATAL ERROR: don't have enough space to buffer. You should consider unbuffered writting..");
 			}
 
 			memcpy(&bufferEntries[bufferHeaderPos], data, size);
@@ -336,41 +337,45 @@ bool BinFormat::WriteZ3SymbolicAddress(unsigned int dest,
 	return true;
 }
 
-bool BinFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) {
+bool BinFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) 
+{
+	unsigned char buff[MAX_ENTRIES_BUFFER_SIZE + sizeof(BinLogEntry)];
+	BinLogEntry *blEntry = (BinLogEntry *)buff;
+	blEntry->header.entryType = Z3_SYMBOLIC_TYPE_JCC;
 
+	char *dataOutput = (char *)&blEntry->data;
+	// Serialize the symbolic Z3 ast then write it to the log
+	const int size = testDetails.serialize(dataOutput, MAX_ENTRIES_BUFFER_SIZE);
+	blEntry->header.entryLength = (unsigned int)size;
 
-	// UNIT TEST ONLY FOR NOW
-	char outBuffer[MAX_ENTRIES_BUFFER_SIZE];
-	const int size = testDetails.serialize(outBuffer, MAX_ENTRIES_BUFFER_SIZE);
+	WriteData(buff, sizeof(blEntry->header) + blEntry->header.entryLength);
 
+	// activate this to test if the serialization is ok
+#if 0
 	SingleTestDetails testDetails_copy;
 	testDetails_copy.deserialize(outBuffer, size);
 
-/*
-TODO:
-	BinLogEntry bleo;
-	bleo.header.entryType = ENTRY_TYPE_Z3_SYMBOLIC;
-	bleo.data.asZ3Symbolic.header.entryType = Z3_SYMBOLIC_TYPE_JCC;
+	assert(testDetails == testDetails_copy);
+#endif 
 
-	bleo.data.asZ3Symbolic.source.z3SymbolicJumpCC.symbolicCond = symbolicFlag.symbolicCond;
-	bleo.data.asZ3Symbolic.source.z3SymbolicJumpCC.testFlags = symbolicFlag.testFlags;
+	return true;
+}
 
-	for (int i = 0; i < FLAG_LEN; ++i) {
-		bleo.data.asZ3Symbolic.source.z3SymbolicJumpCC.symbolicFlags[i] = symbolicFlag.symbolicFlags[i];
+int BinFormat::ReadZ3SymbolicJumpCC(char* bufferToReadFrom, SingleTestDetails& outTestDetails)
+{
+	BinLogEntry *blEntry = (BinLogEntry *)bufferToReadFrom;
+	if (blEntry->header.entryType != Z3_SYMBOLIC_TYPE_JCC)
+	{
+		assert(false && "Only jcc is currently supported for concolic testing..." );
+		outTestDetails.Reset();
+		return -1;
 	}
 
-	bleo.data.asZ3Symbolic.header.entryLength =
-		sizeof(bleo.data.asZ3Symbolic.source.z3SymbolicJumpCC);
+	const int dataSize = blEntry->header.entryLength;
+	outTestDetails.deserialize(bufferToReadFrom, dataSize);
 
-	bleo.header.entryLength = sizeof(Z3SymbolicHeader) +
-		bleo.data.asZ3Symbolic.header.entryLength;
-
-	log->WriteBytes((unsigned char *)&bleo, sizeof(bleo.header) +
-			bleo.header.entryLength);
-
-	WriteAst(ast);
-*/
-	return true;
+	const int totalDataSizeRead = dataSize + sizeof(BinLogEntry);
+	return totalDataSizeRead;
 }
 
 /*bool BinLog::_OpenLog() {
@@ -454,7 +459,7 @@ int serializeNumber(char*& outputBuffer, const T value)
 
 // Returns  the size of string
 // if deep version is used, outputBuffer will point relatively to inputBuffer so either copy it or store your inputBuffer
-int deserializeString_deep(const char* inputBuffer, char* outputBuffer, const size_t maxOutputSize)
+int deserializeString_deep(char*& inputBuffer, char* outputBuffer, const size_t maxOutputSize)
 {
 	int outStringSize = -1;
 	memcpy(&outStringSize, inputBuffer, sizeof(outStringSize));
@@ -469,24 +474,20 @@ int deserializeString_deep(const char* inputBuffer, char* outputBuffer, const si
 
 	memcpy(outputBuffer, inputBuffer, outStringSize);
 	outputBuffer[outStringSize] = '\0';
+	inputBuffer += outStringSize;
 
 	return outStringSize;
 }
 
-int deserializeString_shallow(const char* inputBuffer, char*& outputBuffer, const size_t maxOutputSize)
+int deserializeString_shallow(char*& inputBuffer, char*& outputBuffer)
 {
 	int outStringSize = -1;
 	memcpy(&outStringSize, inputBuffer, sizeof(outStringSize));
 
-	if (outStringSize > maxOutputSize + 1)
-	{
-		assert("Increase buffer, can't read anything");
-		return -1;
-	}
 	assert(outStringSize >= 0);
 	inputBuffer += sizeof(outStringSize);
 	outputBuffer = (char*)inputBuffer;
-
+	inputBuffer += outStringSize;
 	return outStringSize;
 }
 
@@ -531,9 +532,9 @@ int SingleTestDetails::serialize(char* outputBufferInitial, const size_t maxOutp
 	// Write the last line: the AST expression
 	serializeString(outputBuffer, ast.address, ast.size );
 
-	const bool isOk = (outputBuffer - outputBufferInitial) <= maxOutputSize;
-	assert(isOk);
-	return isOk;
+	const int len = (outputBuffer - outputBufferInitial);
+	assert(len <= maxOutputSize);
+	return len;
 }
 
 int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t inputBufferSize)
@@ -571,12 +572,12 @@ int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t 
 
 	// Read the last line: the AST expression
 	char* inputZ3 = nullptr;
-	deserializeString_shallow(inputBuffer, inputZ3, ast.size);
+	ast.size = deserializeString_shallow(inputBuffer, inputZ3);
 	ast.address = inputZ3;
 
-	const bool isOk = (inputBuffer - inputBufferInitial) == inputBufferSize;
-	assert(isOk);
-	return isOk;
+	int len = (inputBuffer - inputBufferInitial);
+	assert(len == inputBufferSize);
+	return len;
 
 }
 

@@ -32,7 +32,7 @@
 
 struct BinLogEntryHeader {
 	unsigned short entryType;
-	unsigned short entryLength;
+	unsigned int entryLength;
 };
 
 struct TaintedIndexHeader {
@@ -207,6 +207,9 @@ public :
 	virtual bool WriteZ3SymbolicAddress(unsigned int dest,
 			SymbolicAddress symbolicAddress, SymbolicAst ast);
 	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
+
+	// Reads from buffer, puts the read data in outTestDetails and returns the size of data read to help client advance read buffer
+	static int ReadZ3SymbolicJumpCC(char* bufferToReadFrom, SingleTestDetails& outTestDetails);
 
 	// Callbacks to know about execution status and update internal data structures	
 	void OnExecutionEnd() override;
