@@ -202,6 +202,7 @@ bool TextFormat::WriteZ3SymbolicAddress(unsigned int dest, SymbolicAddress symbo
 	return true;
 }
 
+
 bool TextFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) 
 {
 	size_t sz;
@@ -214,24 +215,10 @@ bool TextFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails)
 	log->WriteBytes((unsigned char *)line, sz);
 
 	// Write the used symbols indices for this test. The first one is the number of digits used
-	{
-		int remainingSize = MAX_LINE_SIZE;
-		char* headerPos = line;
+	WriteListOfNumbericItems(testDetails.indicesOfInputBytesUsed, line, MAX_LINE_SIZE);
 
-		// Number of symbols used 
-		int written = snprintf(headerPos, remainingSize, "%d ", testDetails.indicesOfInputBytesUsed.size());
-		remainingSize -= written;
-		headerPos += written;
-
-		for (const unsigned int item : testDetails.indicesOfInputBytesUsed)
-		{
-			written = snprintf(headerPos, remainingSize, "%d ", item);
-			remainingSize -= written;
-			headerPos += written;
-		}
-
-		log->WriteBytes((unsigned char*)line, headerPos - line);
-	}
+	// Write the path of basic blocks
+	WriteListOfNumbericItems(testDetails.pathBBlocks, line, MAX_LINE_SIZE);
 
 	// Write Z3 ast
 	log->WriteBytes((unsigned char *)testDetails.ast.address, testDetails.ast.size);

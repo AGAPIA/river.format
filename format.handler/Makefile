@@ -48,10 +48,10 @@ RM = /home/ciprian/Downloads/cmake-3.15.2-Linux-x86_64/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ciprian/testtools/simpletracer
+CMAKE_SOURCE_DIR = /home/ciprian/testtools/river
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ciprian/testtools/simpletracer
+CMAKE_BINARY_DIR = /home/ciprian/testtools/river
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/simpletracer/CMakeFiles /home/ciprian/testtools/simpletracer/river.format/format.handler/CMakeFiles/progress.marks
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/simpletracer/CMakeFiles 0
+	cd /home/ciprian/testtools/river && $(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/river/CMakeFiles /home/ciprian/testtools/river/river.format/format.handler/CMakeFiles/progress.marks
+	cd /home/ciprian/testtools/river && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ciprian/testtools/river/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/clean
+	cd /home/ciprian/testtools/river && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/preinstall
+	cd /home/ciprian/testtools/river && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/preinstall
+	cd /home/ciprian/testtools/river && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ciprian/testtools/river && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 river.format/format.handler/CMakeFiles/format.handler.dir/rule:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/CMakeFiles/format.handler.dir/rule
+	cd /home/ciprian/testtools/river && $(MAKE) -f CMakeFiles/Makefile2 river.format/format.handler/CMakeFiles/format.handler.dir/rule
 .PHONY : river.format/format.handler/CMakeFiles/format.handler.dir/rule
 
 # Convenience name for target.
@@ -168,7 +168,7 @@ format.handler: river.format/format.handler/CMakeFiles/format.handler.dir/rule
 
 # fast build rule for target.
 format.handler/fast:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/build
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/build
 .PHONY : format.handler/fast
 
 BinFormat.o: BinFormat.cpp.o
@@ -177,7 +177,7 @@ BinFormat.o: BinFormat.cpp.o
 
 # target to build an object file
 BinFormat.cpp.o:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o
 .PHONY : BinFormat.cpp.o
 
 BinFormat.i: BinFormat.cpp.i
@@ -186,7 +186,7 @@ BinFormat.i: BinFormat.cpp.i
 
 # target to preprocess a source file
 BinFormat.cpp.i:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.i
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.i
 .PHONY : BinFormat.cpp.i
 
 BinFormat.s: BinFormat.cpp.s
@@ -195,8 +195,35 @@ BinFormat.s: BinFormat.cpp.s
 
 # target to generate assembly for a file
 BinFormat.cpp.s:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.s
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.s
 .PHONY : BinFormat.cpp.s
+
+BinFormatConcolic.o: BinFormatConcolic.cpp.o
+
+.PHONY : BinFormatConcolic.o
+
+# target to build an object file
+BinFormatConcolic.cpp.o:
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o
+.PHONY : BinFormatConcolic.cpp.o
+
+BinFormatConcolic.i: BinFormatConcolic.cpp.i
+
+.PHONY : BinFormatConcolic.i
+
+# target to preprocess a source file
+BinFormatConcolic.cpp.i:
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.i
+.PHONY : BinFormatConcolic.cpp.i
+
+BinFormatConcolic.s: BinFormatConcolic.cpp.s
+
+.PHONY : BinFormatConcolic.s
+
+# target to generate assembly for a file
+BinFormatConcolic.cpp.s:
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.s
+.PHONY : BinFormatConcolic.cpp.s
 
 TextFormat.o: TextFormat.cpp.o
 
@@ -204,7 +231,7 @@ TextFormat.o: TextFormat.cpp.o
 
 # target to build an object file
 TextFormat.cpp.o:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o
 .PHONY : TextFormat.cpp.o
 
 TextFormat.i: TextFormat.cpp.i
@@ -213,7 +240,7 @@ TextFormat.i: TextFormat.cpp.i
 
 # target to preprocess a source file
 TextFormat.cpp.i:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.i
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.i
 .PHONY : TextFormat.cpp.i
 
 TextFormat.s: TextFormat.cpp.s
@@ -222,7 +249,7 @@ TextFormat.s: TextFormat.cpp.s
 
 # target to generate assembly for a file
 TextFormat.cpp.s:
-	cd /home/ciprian/testtools/simpletracer && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.s
+	cd /home/ciprian/testtools/river && $(MAKE) -f river.format/format.handler/CMakeFiles/format.handler.dir/build.make river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.s
 .PHONY : TextFormat.cpp.s
 
 # Help Target
@@ -241,6 +268,9 @@ help:
 	@echo "... BinFormat.o"
 	@echo "... BinFormat.i"
 	@echo "... BinFormat.s"
+	@echo "... BinFormatConcolic.o"
+	@echo "... BinFormatConcolic.i"
+	@echo "... BinFormatConcolic.s"
 	@echo "... TextFormat.o"
 	@echo "... TextFormat.i"
 	@echo "... TextFormat.s"
@@ -255,6 +285,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ciprian/testtools/simpletracer && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ciprian/testtools/river && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

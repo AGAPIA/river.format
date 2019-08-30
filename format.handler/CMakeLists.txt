@@ -12,6 +12,7 @@ include_directories("../../river")
 add_library(format.handler STATIC
     BinFormat.cpp
     TextFormat.cpp
+    BinFormatConcolic.cpp
     )
 
 install (TARGETS format.handler DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)

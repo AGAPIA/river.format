@@ -361,7 +361,7 @@ bool BinFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails)
 	return true;
 }
 
-int BinFormat::ReadZ3SymbolicJumpCC(char* bufferToReadFrom, SingleTestDetails& outTestDetails)
+int BinFormat::ReadZ3SymbolicJumpCC(const char* bufferToReadFrom, SingleTestDetails& outTestDetails)
 {
 	BinLogEntry *blEntry = (BinLogEntry *)bufferToReadFrom;
 	if (blEntry->header.entryType != Z3_SYMBOLIC_TYPE_JCC)
@@ -372,9 +372,11 @@ int BinFormat::ReadZ3SymbolicJumpCC(char* bufferToReadFrom, SingleTestDetails& o
 	}
 
 	const int dataSize = blEntry->header.entryLength;
+	bufferToReadFrom += sizeof(blEntry->header);
+
 	outTestDetails.deserialize(bufferToReadFrom, dataSize);
 
-	const int totalDataSizeRead = dataSize + sizeof(BinLogEntry);
+	const int totalDataSizeRead = dataSize + sizeof(blEntry->header);
 	return totalDataSizeRead;
 }
 
@@ -502,12 +504,38 @@ int deserializeNumber(char*& inputBuffer, T& outValue)
 	return sizeof(outValue);
 }
 
+// Note: list can be vector, map etc...everything that it is std iterable
+template<typename T>
+int serializeListOfNumbers(char*& outputBuffer, const T& listOfItems)
+{
+	// Write the number of items
+	int sz = serializeNumber(outputBuffer, listOfItems.size());
+	for (auto it : listOfItems)
+	{
+		sz += serializeNumber(outputBuffer, it);
+	}
+
+	return sz;
+}
+
+template<typename T>
+int deserializeListOfNumbers(char*& inputBuffer, T& outListOfItems)
+{
+	int numItems = 0;
+	deserializeNumber(inputBuffer, numItems);
+	assert(numItems >= 0);
+	for (int i = 0; i < numItems; i++)
+	{
+		int item = -1;
+		deserializeNumber(inputBuffer, item);
+		outListOfItems.insert(item);
+	}
+}
+
 int SingleTestDetails::serialize(char* outputBufferInitial, const size_t maxOutputSize) const
 {
-	
 	char* outputBuffer = outputBufferInitial;
 	const int taken_as_int = (int)taken;
-	const int numSymbolsUsed = indicesOfInputBytesUsed.size();
 
 	// Write the first line info: test id location, where to go if taken, where to go if not taken
 	{
@@ -521,13 +549,10 @@ int SingleTestDetails::serialize(char* outputBufferInitial, const size_t maxOutp
 	}
 
 	// Write the second line: the number of symbolic variables and their indices used by the corresponding Z3 expression involved in the test
-	{
-		serializeNumber(outputBuffer, numSymbolsUsed);
-		for (auto it : indicesOfInputBytesUsed)
-		{
-			serializeNumber(outputBuffer, it);
-		}
-	}
+	serializeListOfNumbers(outputBuffer, indicesOfInputBytesUsed);
+	
+	// Write the third line: the number of basic blocks encountered to get to this branch test, following the ids of those basic blocks
+	serializeListOfNumbers(outputBuffer, pathBBlocks);
 
 	// Write the last line: the AST expression
 	serializeString(outputBuffer, ast.address, ast.size );
@@ -543,7 +568,6 @@ int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t 
 
 	char* inputBuffer = (char*)inputBufferInitial;
 	int taken_as_int = -1;
-	int numSymbolsUsed = -1;
 
 	// Read the first line info: test id location, where to go if taken, where to go if not taken
 	{
@@ -559,17 +583,11 @@ int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t 
 	}
 
 	// Read the second line: the number of symbolic variables and their indices used by the corresponding Z3 expression involved in the test
-	{
-		deserializeNumber(inputBuffer, numSymbolsUsed);
-		assert(numSymbolsUsed >= 0);
-		for (int i = 0; i < numSymbolsUsed; i++)
-		{
-			int item = -1;
-			deserializeNumber(inputBuffer, item);
-			indicesOfInputBytesUsed.insert(item);
-		}
-	}
+	deserializeListOfNumbers(inputBuffer, indicesOfInputBytesUsed);
 
+	// Read the third line containing the basic block path from previous to this new test branch
+	deserializeListOfNumbers(inputBuffer, pathBBlocks);
+	
 	// Read the last line: the AST expression
 	char* inputZ3 = nullptr;
 	ast.size = deserializeString_shallow(inputBuffer, inputZ3);
@@ -578,6 +596,5 @@ int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t 
 	int len = (inputBuffer - inputBufferInitial);
 	assert(len == inputBufferSize);
 	return len;
-
 }
 

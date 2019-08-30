@@ -5,6 +5,11 @@ river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/include/AbstractLog.h
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/include/BinFormat.h
 
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/BinFormatConcolic.cpp
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/AbstractLog.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/BinFormat.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/BinFormatConcolic.h
+
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/TextFormat.cpp
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/include/AbstractLog.h
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/include/TextFormat.h

@@ -37,6 +37,27 @@ public :
 			SymbolicAddress symbolicAddress, SymbolicAst ast);
 	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
 
+	template<typename T>
+	bool WriteListOfNumbericItems(const T& listOfItems, char* tempBuffer, const int tempBufferSize)
+	{
+		int remainingSize = tempBufferSize;
+		char* headerPos = tempBuffer;
+
+		// Number of symbols used 
+		int written = snprintf(headerPos, remainingSize, "%d ", listOfItems.size());
+		remainingSize -= written;
+		headerPos += written;
+
+		for (const unsigned int item : listOfItems)
+		{
+			written = snprintf(headerPos, remainingSize, "%d ", item);
+			remainingSize -= written;
+			headerPos += written;
+		}
+
+		log->WriteBytes((unsigned char*)tempBuffer, headerPos - tempBuffer);
+	}
+
 private:
 	void WriteAst(SymbolicAst ast);
 };

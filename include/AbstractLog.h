@@ -4,6 +4,7 @@
 #include "revtracer/revtracer.h"		//ExecutionRegs
 #include "CommonCrossPlatform/Common.h" //MAX_PATH
 #include <string.h>
+#include <vector>
 
 class AbstractLog {
 private :
@@ -89,6 +90,7 @@ struct SingleTestDetails
 	DWORD blockOptionNotTaken = 0; // BLock address where it should go if jump is no taken
 	char notTakenOptionModuleName[MAX_PATH] = {'\0'};
 	std::unordered_set<unsigned int> indicesOfInputBytesUsed; // Indices of input bytes used by this test 
+	std::unordered_set<DWORD> pathBBlocks;	// The path formed by basic blocks that were encountered from last test (if any) to this new one
 	bool pending = false; // True if a Jump instruction found and we wait to know if it was taken or not
 	bool taken = false;
 	bool isPending() const { return pending;}
@@ -103,6 +105,7 @@ struct SingleTestDetails
 		pending = false;
 		taken = false;
 		indicesOfInputBytesUsed.clear();
+		pathBBlocks.clear();
 	}
 
 
@@ -120,6 +123,7 @@ struct SingleTestDetails
 		if (strcmp(notTakenOptionModuleName, other.notTakenOptionModuleName)) return false;
 		if (strcmp(takenOptionModuleName, other.takenOptionModuleName)) return false;
 		if (indicesOfInputBytesUsed != other.indicesOfInputBytesUsed) return false;
+		if (pathBBlocks != other.pathBBlocks) return false;
 		if (ast.size != other.ast.size || strcmp(ast.address, other.ast.address)) return false;
 
 		return true;

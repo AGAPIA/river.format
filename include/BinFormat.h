@@ -17,6 +17,8 @@
 #define ENTRY_TYPE_Z3_SYMBOLIC  	0x00E0
 #define ENTRY_TYPE_Z3_AST			0x00F0
 #define ENTRY_TYPE_Z3_MODULE		0x00FF
+#define ENTRY_TYPE_CONCOLIC_TEST_BEGIN 	0x00D1
+#define ENTRY_TYPE_CONCOLIC_TEST_END	0x00D2
 
 #define TAINTED_INDEX_TYPE_CONCAT	0x0001
 #define TAINTED_INDEX_TYPE_EXTRACT	0x0020
@@ -163,7 +165,7 @@ public :
 };*/
 
 class BinFormat : public AbstractFormat {
-private :
+protected :
 	char lastModule[MAX_PATH];
 	char lastNextModule[MAX_PATH];
 
@@ -209,7 +211,7 @@ public :
 	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
 
 	// Reads from buffer, puts the read data in outTestDetails and returns the size of data read to help client advance read buffer
-	static int ReadZ3SymbolicJumpCC(char* bufferToReadFrom, SingleTestDetails& outTestDetails);
+	static int ReadZ3SymbolicJumpCC(const char* bufferToReadFrom, SingleTestDetails& outTestDetails);
 
 	// Callbacks to know about execution status and update internal data structures	
 	void OnExecutionEnd() override;
