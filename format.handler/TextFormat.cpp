@@ -5,6 +5,9 @@
 #include <string.h>
 
 bool TextFormat::WriteTestName(const char *testName) {
+	if (testName == nullptr)
+		return false;
+
 	char line[MAX_PATH + 10];
 	int sz = sprintf(line, "## %s\n", testName);
 
@@ -214,11 +217,12 @@ bool TextFormat::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails)
 	// Write header
 	log->WriteBytes((unsigned char *)line, sz);
 
+
 	// Write the used symbols indices for this test. The first one is the number of digits used
-	WriteListOfNumbericItems(testDetails.indicesOfInputBytesUsed, line, MAX_LINE_SIZE);
+	WriteListOfNumbericItems(testDetails.indicesOfInputBytesUsed, line, MAX_LINE_SIZE, false);
 
 	// Write the path of basic blocks
-	WriteListOfNumbericItems(testDetails.pathBBlocks, line, MAX_LINE_SIZE);
+	WriteListOfNumbericItems(testDetails.pathBBlocks, line, MAX_LINE_SIZE, true);
 
 	// Write Z3 ast
 	log->WriteBytes((unsigned char *)testDetails.ast.address, testDetails.ast.size);

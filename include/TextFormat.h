@@ -38,7 +38,7 @@ public :
 	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails);
 
 	template<typename T>
-	bool WriteListOfNumbericItems(const T& listOfItems, char* tempBuffer, const int tempBufferSize)
+	bool WriteListOfNumbericItems(const T& listOfItems, char* tempBuffer, const int tempBufferSize, const bool asHexa)
 	{
 		int remainingSize = tempBufferSize;
 		char* headerPos = tempBuffer;
@@ -48,14 +48,23 @@ public :
 		remainingSize -= written;
 		headerPos += written;
 
-		for (const unsigned int item : listOfItems)
+		for (const auto item : listOfItems)
 		{
-			written = snprintf(headerPos, remainingSize, "%d ", item);
+			if (asHexa == true)
+			{
+				written = snprintf(headerPos, remainingSize, "%08lx ", (unsigned long int)item);
+			}
+			else
+			{
+				written = snprintf(headerPos, remainingSize, "%d ", (int)item);
+			}	
+			
 			remainingSize -= written;
 			headerPos += written;
 		}
 
 		log->WriteBytes((unsigned char*)tempBuffer, headerPos - tempBuffer);
+		log->WriteBytes((unsigned char*)"\n", 1);
 	}
 
 private:

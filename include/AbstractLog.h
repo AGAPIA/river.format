@@ -37,6 +37,7 @@ public :
 struct BasicBlockPointer {
 	unsigned int offset;
 	char modName[MAX_PATH];
+	int basicBlockIndex;  // This is an index in a mapping data structure from (offset,modname) -> int. Motivation: use less string operations
 };
 
 struct BasicBlockMeta {
@@ -101,7 +102,7 @@ struct SingleTestDetails
 		ast.address = nullptr;
 		ast.size = 0;
 		parentBlock = blockOptionTaken = blockOptionNotTaken = 0;
-		parentModuleName[0] = takenOptionModuleName[0] = notTakenOptionModuleName[0] = '\0';
+		//parentModuleName[0] = takenOptionModuleName[0] = notTakenOptionModuleName[0] = '\0';
 		pending = false;
 		taken = false;
 		indicesOfInputBytesUsed.clear();
@@ -119,9 +120,9 @@ struct SingleTestDetails
 		if (parentBlock != other.parentBlock) return false;
 		if (blockOptionNotTaken != other.blockOptionNotTaken) return false;
 		if (blockOptionTaken != other.blockOptionTaken) return false;
-		if (strcmp(parentModuleName, other.parentModuleName)) return false;
-		if (strcmp(notTakenOptionModuleName, other.notTakenOptionModuleName)) return false;
-		if (strcmp(takenOptionModuleName, other.takenOptionModuleName)) return false;
+		//if (strcmp(parentModuleName, other.parentModuleName)) return false;
+		//if (strcmp(notTakenOptionModuleName, other.notTakenOptionModuleName)) return false;
+		//if (strcmp(takenOptionModuleName, other.takenOptionModuleName)) return false;
 		if (indicesOfInputBytesUsed != other.indicesOfInputBytesUsed) return false;
 		if (pathBBlocks != other.pathBBlocks) return false;
 		if (ast.size != other.ast.size || strcmp(ast.address, other.ast.address)) return false;

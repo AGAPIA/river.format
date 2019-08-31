@@ -539,9 +539,9 @@ int SingleTestDetails::serialize(char* outputBufferInitial, const size_t maxOutp
 
 	// Write the first line info: test id location, where to go if taken, where to go if not taken
 	{
-		serializeString(outputBuffer, parentModuleName );
-		serializeString(outputBuffer, takenOptionModuleName );
-		serializeString(outputBuffer, notTakenOptionModuleName );
+		//serializeString(outputBuffer, parentModuleName );
+		//serializeString(outputBuffer, takenOptionModuleName );
+		//serializeString(outputBuffer, notTakenOptionModuleName );
 		serializeNumber(outputBuffer, parentBlock);
 		serializeNumber(outputBuffer, blockOptionTaken);
 		serializeNumber(outputBuffer, blockOptionNotTaken);	
@@ -571,9 +571,9 @@ int SingleTestDetails::deserialize(const char* inputBufferInitial, const size_t 
 
 	// Read the first line info: test id location, where to go if taken, where to go if not taken
 	{
-		deserializeString_deep(inputBuffer, parentModuleName, sizeof(parentModuleName));
-		deserializeString_deep(inputBuffer, takenOptionModuleName, sizeof(takenOptionModuleName));
-		deserializeString_deep(inputBuffer, notTakenOptionModuleName, sizeof(notTakenOptionModuleName));
+		//deserializeString_deep(inputBuffer, parentModuleName, sizeof(parentModuleName));
+		//deserializeString_deep(inputBuffer, takenOptionModuleName, sizeof(takenOptionModuleName));
+		//deserializeString_deep(inputBuffer, notTakenOptionModuleName, sizeof(notTakenOptionModuleName));
 		deserializeNumber(inputBuffer, parentBlock);
 		deserializeNumber(inputBuffer, blockOptionTaken);
 		deserializeNumber(inputBuffer, blockOptionNotTaken);	
