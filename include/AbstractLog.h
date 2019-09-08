@@ -169,6 +169,13 @@ public :
 			SymbolicAddress symbolicAddress, SymbolicAst ast) = 0;
 	virtual bool WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetails) = 0;
 
+	// This is for logs that are buffering the content inside with the purpose of sending the output to a socket 
+	virtual int GetBufferedSize() { return 0;}
+	virtual char* GetBufferedContent() { return nullptr;}
+	virtual int FinalizeBufferedContent() {return -1;} // This call is for client to be sure that the buffered content is ready for usage	
+	int outputSocket = -1; // Used when the output is a socket. TODO: maybe we unify this with AbstractLog composition inside this class
+	FILE* inputSocketStream = 0; // This is the read file stream opened for the outputSocket.
+	virtual void sendBufferedContentThroughSocket(){}
 };
 
 /*class AbstractLog {

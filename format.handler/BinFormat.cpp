@@ -3,12 +3,17 @@
 #include <string.h>
 #include <assert.h>
 #include <cstdlib>
-
+#include <fcntl.h>   
+#include <sys/stat.h> 
+#include <sys/types.h>   
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 #include "CommonCrossPlatform/Common.h" //MAX_PATH
 
 #define MAX_AST 4096
 
-BinFormat::BinFormat(AbstractLog *l, bool shouldBufferEntries)
+BinFormat::BinFormat(AbstractLog *l, bool shouldBufferEntries, bool _noOutputWrite)
 : AbstractFormat(l)
 {
 	lastModule[0] 		= '\0';
@@ -16,6 +21,8 @@ BinFormat::BinFormat(AbstractLog *l, bool shouldBufferEntries)
 	bufferingEntries 	= shouldBufferEntries;
 	bufferEntries 		= shouldBufferEntries ? new unsigned char[MAX_ENTRIES_BUFFER_SIZE] : nullptr;
 	bufferHeaderPos 	= 0;
+	noOutputWrite 		= _noOutputWrite;
+	assert((_noOutputWrite == false || shouldBufferEntries) && "use noOutputWrite only with buffering !");
 }
 
 BinFormat::~BinFormat()
@@ -29,7 +36,7 @@ BinFormat::~BinFormat()
 
 void BinFormat::OnExecutionBegin(const char* testName)
 {
-	bufferHeaderPos = 0;
+	bufferHeaderPos = CONTENT_OFFSET;	// Leaving the first 4 bytes for total buffer size; motivation: send the entire over the network for example
 	lastModule[0] = '\0';
 	lastNextModule[0] = '\0';
 	WriteTestName(testName);
@@ -41,11 +48,12 @@ void BinFormat::OnExecutionEnd()
 		log->Flush();
 	}
 	else {
-		// Write the total number of bytes of the output buffer, then the buffered data
-		const size_t totalSizeToWrite = sizeof(bufferEntries[0]) * bufferHeaderPos;
-		log->WriteBytes((unsigned char*)&totalSizeToWrite, sizeof(totalSizeToWrite));
-		log->WriteBytes(bufferEntries, sizeof(bufferEntries[0]) * bufferHeaderPos);
-		log->Flush();
+		if (noOutputWrite == false) {	// Output is handled manually ?
+			// Write the total number of bytes of the output buffer, then the buffered data
+			const int totalSize = FinalizeBufferedContent();
+			log->WriteBytes(bufferEntries, totalSize);
+			log->Flush();
+		}
 	}
 }
 
@@ -378,6 +386,37 @@ int BinFormat::ReadZ3SymbolicJumpCC(const char* bufferToReadFrom, SingleTestDeta
 
 	const int totalDataSizeRead = dataSize + sizeof(blEntry->header);
 	return totalDataSizeRead;
+}
+
+int BinFormat::GetBufferedSize()
+{
+	return bufferHeaderPos;
+}
+
+char* BinFormat::GetBufferedContent()
+{
+	return (char*)bufferEntries;
+}
+
+int BinFormat::FinalizeBufferedContent()
+{
+	// Write the output content size in the beggining of the buffer
+	// Note (in OnExecutionBegin) that we started from byte 4 !
+	const int totalOutputToWrite = sizeof(bufferEntries[0]) * bufferHeaderPos;
+	*(int*)(bufferEntries) = totalOutputToWrite;
+	return totalOutputToWrite + sizeof(int);
+}
+
+void BinFormat::sendBufferedContentThroughSocket()
+{
+	assert(outputSocket >0 && "Socket is not set !");
+	const int totalSize = FinalizeBufferedContent();
+	const char* addrOfOutputBuffer = GetBufferedContent();
+	assert(totalSize > 0 && addrOfOutputBuffer != nullptr);					
+	if (send(outputSocket, addrOfOutputBuffer, totalSize, 0) <0)
+	{
+		perror("socket send: ");
+	}
 }
 
 /*bool BinLog::_OpenLog() {

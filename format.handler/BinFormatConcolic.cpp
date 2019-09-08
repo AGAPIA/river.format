@@ -64,7 +64,8 @@ void BinFormatConcolic::WriteStartHeader(const bool flush)
 	WriteData((unsigned char*)&entry, sizeof(entry));
 	if (flush)
 	{
-		log->Flush();
+		if (!noOutputWrite)
+			log->Flush();
 	}
 }
 
@@ -77,7 +78,8 @@ void BinFormatConcolic::WriteEndHeader(const bool flush)
 	WriteData((unsigned char*)&entry, sizeof(entry));
 	if (flush)
 	{
-		log->Flush();
+		if (!noOutputWrite)
+			log->Flush();
 	}
 }
 
@@ -96,7 +98,7 @@ void BinFormatConcolic::OnExecutionEnd()
 		assert(false && "Failed the sanity check. We didn't even wrote the buffer");
 	}
 
-	BinLogEntryHeader* beginHeader = (BinLogEntryHeader*) bufferEntries;
+	BinLogEntryHeader* beginHeader = (BinLogEntryHeader*) &bufferEntries[CONTENT_OFFSET];
 	assert(beginHeader->entryType == ENTRY_TYPE_CONCOLIC_TEST_BEGIN && "Incorrect first entry type");
 	beginHeader->entryLength = m_testCounter;
 
@@ -105,7 +107,7 @@ void BinFormatConcolic::OnExecutionEnd()
 
 
 	// This is just a debug test to see if I write the binary output log in trace.simple.out, can I read it correctly ?
-#if 1
+#if 0
 	FILE *f = fopen("trace.simple.out", "rb");
 	fseek(f, 0, SEEK_END);
 	const size_t fSize = ftell(f);
@@ -129,3 +131,4 @@ bool BinFormatConcolic::WriteZ3SymbolicJumpCC(const SingleTestDetails& testDetai
 	m_testCounter++;
 	return BinFormat::WriteZ3SymbolicJumpCC(testDetails);
 }
+

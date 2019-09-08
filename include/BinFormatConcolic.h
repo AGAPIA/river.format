@@ -18,8 +18,8 @@ class ConcolicExecutionResult
 class BinFormatConcolic : public BinFormat {
 
 public:
-	BinFormatConcolic(AbstractLog *l, bool shouldBufferEntries=false)
-		: BinFormat(l, shouldBufferEntries){}
+	BinFormatConcolic(AbstractLog *l)
+		: BinFormat(l, true, true){}
 	~BinFormatConcolic(){}
 
 	// Callbacks to know about execution status and update internal data structures	

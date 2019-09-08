@@ -176,13 +176,16 @@ protected :
 	unsigned char* bufferEntries;								// If this is created with shouldBufferEntries = true => we'll buffer all entries and send them at once
 	static const int MAX_ENTRIES_BUFFER_SIZE = 1024*1024*2;   	// Preallocated buffer used when buffering entries. If exceeded an exception occurs. TODO: recreate buffer when exceeded max size ?
 	int bufferHeaderPos;
+	bool noOutputWrite;											// Use this with true if you want to manage yourself the buffered output (e.g. send it over a socket)
+
+	static const int CONTENT_OFFSET = sizeof(int);
 
   // Writes data either to the internal buffer or to the log file depending on the type
 	void WriteData(unsigned char* data, const unsigned int size, const bool ignoreInBufferedMode = false);
 	bool WriteBBModule(const char *moduleName, unsigned short type);
 	bool WriteAst(SymbolicAst ast);
 public :
-	BinFormat(AbstractLog *l, bool shouldBufferEntries=false);
+	BinFormat(AbstractLog *l, bool shouldBufferEntries=false, bool noOutputWrite=false);
 	~BinFormat();
 
 	virtual bool WriteTestName(
@@ -216,6 +219,11 @@ public :
 	// Callbacks to know about execution status and update internal data structures	
 	void OnExecutionEnd() override;
 	void OnExecutionBegin(const char* testName) override; // testName optional when running in buffered / flow mode (you can set it as nullptr)
+
+	virtual int GetBufferedSize() override;
+	virtual char* GetBufferedContent() override;
+	virtual int FinalizeBufferedContent() override;
+	virtual void sendBufferedContentThroughSocket() override;
 };
 
 #endif

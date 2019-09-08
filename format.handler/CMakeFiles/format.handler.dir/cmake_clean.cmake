@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/format.handler.dir/BinFormat.cpp.o"
-  "CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o"
   "CMakeFiles/format.handler.dir/TextFormat.cpp.o"
-  "libformat.handler.a"
+  "CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o"
   "libformat.handler.pdb"
+  "libformat.handler.a"
 )
 
 # Per-language clean rules from dependency scanning.
