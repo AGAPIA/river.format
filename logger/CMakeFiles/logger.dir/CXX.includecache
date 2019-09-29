@@ -18,12 +18,6 @@ FileLog.h
 string.h
 -
 
-/home/ciprian/testtools/simpletracer/river.format/logger/Logger.cpp
-Logger.h
-/home/ciprian/testtools/simpletracer/river.format/logger/Logger.h
-stdarg.h
--
-
 river.format/include/AbstractLog.h
 revtracer/revtracer.h
 river.format/include/revtracer/revtracer.h
@@ -43,10 +37,6 @@ AbstractLog.h
 river.format/include/AbstractLog.h
 CommonCrossPlatform/Common.h
 river.format/include/CommonCrossPlatform/Common.h
-
-river.format/include/Logger.h
-stdio.h
--
 
 river.format/logger/../../river/CommonCrossPlatform/BasicTypes.h
 

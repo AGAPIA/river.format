@@ -15,6 +15,18 @@ assert.h
 -
 cstdlib
 -
+fcntl.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+sys/un.h
+-
 CommonCrossPlatform/Common.h
 /home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
 
