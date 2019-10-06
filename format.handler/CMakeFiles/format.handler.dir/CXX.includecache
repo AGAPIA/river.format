@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormat.cpp
+/home/ciprian/testtools/river/river.format/format.handler/BinFormat.cpp
 BinFormat.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormat.h
+/home/ciprian/testtools/river/river.format/format.handler/BinFormat.h
 string.h
 -
 assert.h
@@ -28,11 +28,11 @@ sys/socket.h
 sys/un.h
 -
 CommonCrossPlatform/Common.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
+/home/ciprian/testtools/river/river.format/format.handler/CommonCrossPlatform/Common.h
 
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormatConcolic.cpp
+/home/ciprian/testtools/river/river.format/format.handler/BinFormatConcolic.cpp
 BinFormatConcolic.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/BinFormatConcolic.h
+/home/ciprian/testtools/river/river.format/format.handler/BinFormatConcolic.h
 string.h
 -
 assert.h
@@ -40,15 +40,15 @@ assert.h
 cstdlib
 -
 CommonCrossPlatform/Common.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
+/home/ciprian/testtools/river/river.format/format.handler/CommonCrossPlatform/Common.h
 
-/home/ciprian/testtools/simpletracer/river.format/format.handler/TextFormat.cpp
+/home/ciprian/testtools/river/river.format/format.handler/TextFormat.cpp
 TextFormat.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/TextFormat.h
+/home/ciprian/testtools/river/river.format/format.handler/TextFormat.h
 revtracer/river.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/revtracer/river.h
+/home/ciprian/testtools/river/river.format/format.handler/revtracer/river.h
 CommonCrossPlatform/Common.h
-/home/ciprian/testtools/simpletracer/river.format/format.handler/CommonCrossPlatform/Common.h
+/home/ciprian/testtools/river/river.format/format.handler/CommonCrossPlatform/Common.h
 string.h
 -
 
@@ -104,11 +104,11 @@ river.format/format.handler/../../river/revtracer/environment.h
 RiverAddress.h
 river.format/format.handler/../../river/revtracer/RiverAddress.h
 
-river.format/include/AbstractLog.h
+river.format/format.handler/../include/AbstractLog.h
 revtracer/revtracer.h
-river.format/include/revtracer/revtracer.h
+river.format/format.handler/../include/revtracer/revtracer.h
 CommonCrossPlatform/Common.h
-river.format/include/CommonCrossPlatform/Common.h
+river.format/format.handler/../include/CommonCrossPlatform/Common.h
 string.h
 -
 vector
@@ -116,23 +116,23 @@ vector
 unordered_set
 -
 
-river.format/include/BinFormat.h
+river.format/format.handler/../include/BinFormat.h
 stdio.h
 -
 AbstractLog.h
-river.format/include/AbstractLog.h
+river.format/format.handler/../include/AbstractLog.h
 CommonCrossPlatform/Common.h
-river.format/include/CommonCrossPlatform/Common.h
+river.format/format.handler/../include/CommonCrossPlatform/Common.h
 
-river.format/include/BinFormatConcolic.h
+river.format/format.handler/../include/BinFormatConcolic.h
 BinFormat.h
-river.format/include/BinFormat.h
+river.format/format.handler/../include/BinFormat.h
 vector
 -
 
-river.format/include/TextFormat.h
+river.format/format.handler/../include/TextFormat.h
 stdio.h
 -
 AbstractLog.h
-river.format/include/AbstractLog.h
+river.format/format.handler/../include/AbstractLog.h
 

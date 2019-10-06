@@ -7,8 +7,8 @@ river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/format.handler/../../river/revtracer/DebugPrintFlags.h
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/format.handler/../../river/revtracer/common.h
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/format.handler/../../river/revtracer/revtracer.h
-river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/include/AbstractLog.h
-river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/include/BinFormat.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/format.handler/../include/AbstractLog.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormat.cpp.o: river.format/format.handler/../include/BinFormat.h
 
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/BinFormatConcolic.cpp
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../../river/CommonCrossPlatform/BasicTypes.h
@@ -16,9 +16,9 @@ river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../../river/revtracer/DebugPrintFlags.h
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../../river/revtracer/common.h
 river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../../river/revtracer/revtracer.h
-river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/AbstractLog.h
-river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/BinFormat.h
-river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/include/BinFormatConcolic.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../include/AbstractLog.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../include/BinFormat.h
+river.format/format.handler/CMakeFiles/format.handler.dir/BinFormatConcolic.cpp.o: river.format/format.handler/../include/BinFormatConcolic.h
 
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/TextFormat.cpp
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../../river/CommonCrossPlatform/BasicTypes.h
@@ -29,6 +29,6 @@ river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: rive
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../../river/revtracer/environment.h
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../../river/revtracer/revtracer.h
 river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../../river/revtracer/river.h
-river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/include/AbstractLog.h
-river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/include/TextFormat.h
+river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../include/AbstractLog.h
+river.format/format.handler/CMakeFiles/format.handler.dir/TextFormat.cpp.o: river.format/format.handler/../include/TextFormat.h
 
