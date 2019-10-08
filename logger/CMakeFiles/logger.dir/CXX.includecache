@@ -6,67 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/home/ciprian/testtools/river/river.format/logger/AbstractLog.cpp
+/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.cpp
 AbstractLog.h
-/home/ciprian/testtools/river/river.format/logger/AbstractLog.h
+/home/ciprian/testtools/simpletracer/river.format/logger/AbstractLog.h
 string.h
 -
 
-/home/ciprian/testtools/river/river.format/logger/FileLog.cpp
+/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.cpp
 FileLog.h
-/home/ciprian/testtools/river/river.format/logger/FileLog.h
+/home/ciprian/testtools/simpletracer/river.format/logger/FileLog.h
 string.h
 -
 
-/home/ciprian/testtools/river/river.format/logger/Logger.cpp
+/home/ciprian/testtools/simpletracer/river.format/logger/Logger.cpp
 Logger.h
-/home/ciprian/testtools/river/river.format/logger/Logger.h
+/home/ciprian/testtools/simpletracer/river.format/logger/Logger.h
 stdarg.h
 -
 
-river.format/logger/../../river/CommonCrossPlatform/BasicTypes.h
-
-river.format/logger/../../river/CommonCrossPlatform/Common.h
-fcntl.h
--
-unistd.h
--
-stdint.h
--
-sys/stat.h
--
-sys/mman.h
--
-sys/types.h
--
-pthread.h
--
-unistd.h
--
-dlfcn.h
--
-link.h
--
-Windows.h
--
-
-river.format/logger/../../river/revtracer/DebugPrintFlags.h
-
-river.format/logger/../../river/revtracer/common.h
-
-river.format/logger/../../river/revtracer/revtracer.h
-DebugPrintFlags.h
-river.format/logger/../../river/revtracer/DebugPrintFlags.h
-../CommonCrossPlatform/BasicTypes.h
-river.format/logger/../../river/CommonCrossPlatform/BasicTypes.h
-common.h
-river.format/logger/../../river/revtracer/common.h
-
-river.format/logger/../include/AbstractLog.h
+river.format/include/AbstractLog.h
 revtracer/revtracer.h
-river.format/logger/../include/revtracer/revtracer.h
+river.format/include/revtracer/revtracer.h
 CommonCrossPlatform/Common.h
-river.format/logger/../include/CommonCrossPlatform/Common.h
+river.format/include/CommonCrossPlatform/Common.h
 string.h
 -
 vector
@@ -74,15 +36,15 @@ vector
 unordered_set
 -
 
-river.format/logger/../include/FileLog.h
+river.format/include/FileLog.h
 stdio.h
 -
 AbstractLog.h
-river.format/logger/../include/AbstractLog.h
+river.format/include/AbstractLog.h
 CommonCrossPlatform/Common.h
-river.format/logger/../include/CommonCrossPlatform/Common.h
+river.format/include/CommonCrossPlatform/Common.h
 
-river.format/logger/../include/Logger.h
+river.format/include/Logger.h
 stdio.h
 -
 
