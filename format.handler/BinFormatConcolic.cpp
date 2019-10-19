@@ -31,8 +31,27 @@ bool ConcolicExecutionResult::deserializeFromStream(const char* bufferIn_origina
 	{		
 		// Read the header from buffer and advance buffer
 		SingleTestDetails& testData = m_tests[i];
-		const int size = BinFormat::ReadZ3SymbolicJumpCC(bufferIn, testData);
-		bufferIn += size;
+
+#if 0
+		// HACK
+		if (i == 0)
+		{
+			BinLogEntry *blEntry = (BinLogEntry *)bufferIn;
+			if (blEntry->header.entryType != Z3_SYMBOLIC_TYPE_JCC)
+			{
+				assert(false && "Only jcc is currently supported for concolic testing..." );
+			}
+
+			const int dataSize = blEntry->header.entryLength;
+			bufferIn += sizeof(blEntry->header);
+			bufferIn += dataSize;
+		}
+		else 
+#endif
+		{
+			const int size = BinFormat::ReadZ3SymbolicJumpCC(bufferIn, testData);
+			bufferIn += size;
+		}
 	}
 
     // Decode last item from bufferIn which must be an END header - as a sanity check
